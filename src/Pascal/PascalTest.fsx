@@ -5,7 +5,9 @@ open Pascal
 let test P = fun x -> if P x then Ok x else Error x
 
 let hasPropertyOne (n: int, k: int) =
-    if k = 0 || k = n then
+    if n < 0 || k < 0 || k > n then
+        true // vacuously true for invalid parameters
+    elif k = 0 || k = n then
         pascal (n,k) = 1
     else
         true
@@ -38,5 +40,7 @@ let printTestResults results =
 
 let testPropertyTwoResults () = testPropertyTwo testInputs
 
+printf "Property 1: "
 testPropertyOneResults () |> printTestResults
+printf "Property 2: "
 testPropertyTwoResults () |> printTestResults
